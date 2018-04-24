@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  * <p>
  * For consideration: it might be beneficial to create individual nano-services for each CRUD type operation (but these
  * decisions depend on the use-cases and the minimal viable product suitable for the business use-case etc).
+ * <p>
+ * If the use-cases were to 'grow' and become more complex I would recommend introducing some form of delegation/
+ * mediator pattern to handle/encapsulate the business logic and handle communications with the DAO (business object).
  *
  * @author higginss
  */
