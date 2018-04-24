@@ -1,6 +1,4 @@
 language: java
-jdk:
-  - oraclejdk8
-  - oraclejdk7
-install: true
-script: ./mvnw clean install
+jdk: oraclejdk8
+#install: true
+#script: ./mvnw clean install
