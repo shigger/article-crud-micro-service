@@ -5,7 +5,5 @@ jdk: oraclejdk8
 notifications:
     email:
         - shigger@gmail.com
-before_install:
-    - pip install --user codecov    #Install codecov
 after_success:
-    - codecov                       #Run codecov
+  - bash <(curl -s https://codecov.io/bash)
