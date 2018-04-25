@@ -10,21 +10,21 @@ screenshots illustrate the various integration hooks configured.
 To Run:
 ------
 
-Download 
-    https://github.com/shigger/article-crud-micro-service/blob/development/deploy/article-microservice-0.0.1-SNAPSHOT.jar
-(Or build from source.)
+On GitHub at shigger/article-crud-micro-service (master and development branches)
+
+Download https://github.com/shigger/article-crud-micro-service/blob/master/deploy/article-microservice-0.0.1-SNAPSHOT.jar (Or build from source)
+
 And run e.g. >java -jar article-microservice-0.0.1-SNAPSHOT.jar
-Test by downloading 
-    https://github.com/shigger/article-crud-micro-service/blob/development/src/test/article_tests.postman_collection.json
+
+Test by downloading https://github.com/shigger/article-crud-micro-service/blob/master/src/test/article_tests.postman_collection.json
+
 And import the test scripts/cases into Postman to run and use as a sandbox.
+
 Or test by constructing api requests based on the api documentation supplied (TODO) using any appropriate tool.
 
-Code coverage reports (html) are available at 
-    https://github.com/shigger/article-crud-micro-service/tree/development/deploy/jacoco
-but are integrated into the code coverage reporting tool 'codecov.io' via 
-    https://codecov.io/gh/shigger/article-crud-micro-service/branch/development
-Integrated CI and build status is managed by TravisCI at: 
-    https://travis-ci.org/shigger/article-crud-micro-service
+Code coverage reports (html) are available at https://github.com/shigger/article-crud-micro-service/tree/master/deploy/jacoco but are integrated into the code coverage reporting tool 'codecov.io' via https://codecov.io/gh/shigger/article-crud-micro-service/branch/development
+
+Integrated CI and build status is managed by TravisCI at: https://travis-ci.org/shigger/article-crud-micro-service
 
 
 Application Architecture:
@@ -44,7 +44,7 @@ Code-Coverage = JaCoCo + codecov.io
 
 Tests = Spring Test/Mock + JUnit + Postman (RESTful API)
 
-CI = TravisCI (integrated with GitHub + Postman + JaCoCo
+CI = TravisCI (integrated with GitHub + Postman + JaCoCo)
 
 TODO:
 ----
