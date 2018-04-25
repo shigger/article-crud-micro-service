@@ -1,4 +1,26 @@
 language: java
 jdk: oraclejdk8
+#addons:
+#  artifacts: true
 #install: true
 #script: ./mvnw clean install
+#notifications:
+#    email:
+#        - xxxxxxx@gmail.com
+#
+# Following for postman integration
+#
+#install:
+#  - npm install newman
+#
+#before_script:
+#  - node --version
+#  - npm --version
+#  - node_modules/.bin/newman --version
+#
+#script:
+#  - node_modules/.bin/newman run src/test/article_tests.postman_collection.json
+# End of postman integration
+#
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -22,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  * <p>
  * For consideration: it might be beneficial to create individual nano-services for each CRUD type operation (but these
  * decisions depend on the use-cases and the minimal viable product suitable for the business use-case etc).
+ * <p>
+ * If the use-cases were to 'grow' and become more complex recommend introducing some form of delegation/mediator 
+ * pattern to handle/encapsulate the business logic and handle communications with the DAO (business object).
  *
  * @author higginss
  */
@@ -35,7 +39,7 @@ public class ArticlesController {
     /**
      * Upload an article to the database: example uri = http://localhost:8080/api/v1/article/ with posted data =
      * {"author":"Stephen Higgins", "headline":"MongoDB Rocks!", "content":"This is an experiment in lightweight
-     * micro-service work.", "topics":["technology","news"]}
+     * micro-service work.", "topics":["technology","news"]} thus creating a new article all the time.
      *
      * @param article the article to upload containing content and a list of topics (treated as embedded documents).
      * @return the article just uploaded containing the unique identifier assigned to it.
@@ -43,6 +47,20 @@ public class ArticlesController {
     @PostMapping(value = "/article")
     public Article uploadArticle(@RequestBody Article article) {
         articleDao.save(article);
+        return article;
+    }
+
+    //TODO - add some update services...post v put is a design decision in these cases ?
+    @PutMapping(value = "/article/")
+    public Article updateArticle(@RequestBody Article article) {
+        if (article.getId() != null && !article.getId().equals("")) {
+            // For updating an article ensure it already has been persisted and update/replace all fields.
+            articleDao.save(article);
+        }
+        else {
+            // Is this an invalid invocation as we expect to update the article not create a new one !
+             throw new ArticleNotFoundException("id-" + "");
+        }
         return article;
     }
 
@@ -106,7 +124,4 @@ public class ArticlesController {
         // Only attempt to delete if it already exists.
         articleDao.delete(id);
     }
-    
-    //TODO - add some update services...
-    
 }

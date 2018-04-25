@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Article.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ArticleMicroService</a> &gt; <a href="index.source.html" class="el_package">com.higginss.model</a> &gt; <span class="el_source">Article.java</span></div><h1>Article.java</h1><pre class="source lang-java linenums">package com.higginss.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+/**
+ * &lt;u&gt;Design Notes&lt;/u&gt;
+ * &lt;p&gt;
+ The topics are self-contained within each article document but perhaps could be stored/aggregated externally if
+ deemed beneficial and if possible in MongoDB (similar to a 'join' in SQL).
+ * 
+ * @author higginss
+ */
+@Document(collection = &quot;articles&quot;)
+public class Article {
+
+    @Id
+    private String id;
+    private String author;
+    private String headline;
+    private String content;
+<span class="pc" id="L24">    private List&lt;String&gt; topics = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L26">    public Article() {</span>
+<span class="fc" id="L27">    }</span>
+
+<span class="nc" id="L29">    public Article(String author, String headline, String content, List&lt;String&gt;topics) {</span>
+<span class="nc" id="L30">        this.author = author;</span>
+<span class="nc" id="L31">        this.headline = headline;</span>
+<span class="nc" id="L32">        this.content = content;</span>
+<span class="nc" id="L33">        this.topics = topics;</span>
+<span class="nc" id="L34">    }</span>
+
+    public String getId() {
+<span class="fc" id="L37">        return id;</span>
+    }
+
+    public void setId(String id) {
+<span class="fc" id="L41">        this.id = id;</span>
+<span class="fc" id="L42">    }</span>
+
+    public String getAuthor() {
+<span class="fc" id="L45">        return author;</span>
+    }
+
+    public void setAuthor(String author) {
+<span class="fc" id="L49">        this.author = author;</span>
+<span class="fc" id="L50">    }</span>
+
+    public String getHeadline() {
+<span class="fc" id="L53">        return headline;</span>
+    }
+
+    public void setHeadline(String headline) {
+<span class="fc" id="L57">        this.headline = headline;</span>
+<span class="fc" id="L58">    }</span>
+
+    public String getContent() {
+<span class="fc" id="L61">        return content;</span>
+    }
+
+    public void setContent(String content) {
+<span class="fc" id="L65">        this.content = content;</span>
+<span class="fc" id="L66">    }</span>
+
+    public List&lt;String&gt; getTopics() {
+<span class="fc" id="L69">        return topics;</span>
+    }
+
+    public void setTopics(List&lt;String&gt; topics) {
+<span class="fc" id="L73">        this.topics = topics;</span>
+<span class="fc" id="L74">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L78">        return &quot;Article{&quot; + &quot;id=&quot; + id + &quot;, author=&quot; + author + &quot;, headline=&quot; + headline + &quot;, content=&quot; + content +</span>
+                &quot;, topics=&quot; + topics + '}';
+    }   
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
