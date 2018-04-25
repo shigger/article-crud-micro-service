@@ -14,7 +14,7 @@ before_script:
   - node_modules/.bin/newman --version
 
 script:
-  - node_modules/.bin/newman run src/test/article_tests.postman_collection.json
+  - node_modules/.bin/newman run src/test/article_api_tests.postman_collection.json
   
 after_success:
   - bash <(curl -s https://codecov.io/bash)
