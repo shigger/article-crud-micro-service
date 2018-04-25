@@ -22,7 +22,7 @@ And import the test scripts/cases into Postman to run and use as a sandbox.
 
 Or test by constructing api requests based on the api documentation supplied (TODO) using any appropriate tool.
 
-Code coverage reports (html) are available at https://github.com/shigger/article-crud-micro-service/tree/master/deploy/jacoco but are integrated into the code coverage reporting tool 'codecov.io' via https://codecov.io/gh/shigger/article-crud-micro-service/branch/development
+Code coverage reports (html) are available at https://github.com/shigger/article-crud-micro-service/tree/master/deploy/jacoco but are integrated into the code coverage reporting tool 'codecov.io' via https://codecov.io/gh/shigger/article-crud-micro-service/branch/master
 
 Integrated CI and build status is managed by TravisCI at: https://travis-ci.org/shigger/article-crud-micro-service
 
@@ -30,7 +30,7 @@ Integrated CI and build status is managed by TravisCI at: https://travis-ci.org/
 Application Architecture:
 ------------------------
 
-Frameworks = Spring Boot
+Frameworks = Spring Boot (with embedded Tomcat server)
 
 Database = MongoDB (embedded)
 
