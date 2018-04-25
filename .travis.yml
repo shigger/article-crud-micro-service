@@ -4,6 +4,17 @@ jdk: oraclejdk8
 #script: ./mvnw clean install
 #notifications:
 #    email:
-#        - shigger@gmail.com
+#        - xxxxxxx@gmail.com
+install:
+  - npm install newman
+
+before_script:
+  - node --version
+  - npm --version
+  - node_modules/.bin/newman --version
+
+script:
+  - node_modules/.bin/newman run tests/bitcoinz.postman_collection.json -e tests/tests.postman_environment.json
+  
 after_success:
   - bash <(curl -s https://codecov.io/bash)

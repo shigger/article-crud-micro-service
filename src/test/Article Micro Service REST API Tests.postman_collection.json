@@ -1,0 +1,178 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Article Micro Service REST API Tests",
+		"_postman_id": "2a80309b-e079-dba1-7a37-ac63fde442db",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Upload Article With Multiple Topics",
+			"request": {
+				"url": "http://localhost:8080/api/v1/article/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"author\":\"Stephen Higgins\",\n\"headline\":\" Another article with couple of topics.\",\n\"content\":\"This is a bright day full of sunshine and hope.\",\n\"topics\":[\n\t\"Daily\",\n\t\"Lifestyle\"\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Article",
+			"request": {
+				"url": "http://localhost:8080/api/v1/article/",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"id\": \"5adf5c821edfa03054c54a1c\",\n\"author\":\"Stephen Higgins (Updated)\",\n\"headline\":\" Another article with couple of topics.\",\n\"content\":\"This is a bright day full of sunshine and hope and it keeps changing.\",\n\"topics\":[\n\t\"Quotes\",\n\t\"Special\"\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Article Invalid",
+			"request": {
+				"url": "http://localhost:8080/api/v1/article/",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"author\":\"Stephen Higgins\",\n\"headline\":\" Must update an already existing article - so must have an id.\",\n\"content\":\"This is a bright day full of sunshine and hope and it keeps changing.\",\n\"topics\":[\n\t\"Quotes\",\n\t\"Sayings\"\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Article With No Topics",
+			"request": {
+				"url": "http://localhost:8080/api/v1/article/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"author\":\"Stephen Higgins\",\n\"headline\":\" Another article with no topics.\",\n\"content\":\"This is a bright day full of sunshine and hope but alas it is lonely.\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Article By Unique Id",
+			"request": {
+				"url": "http://localhost:8080/api/v1/article/5adf05a115b2d72fac387e98",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Article That Does Not Exist",
+			"request": {
+				"url": "http://localhost:8080/api/v1/article/5adf05a115b2d72fac387e98",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Article By Unique Id",
+			"request": {
+				"url": "http://localhost:8080/api/v1/article/5adf0edd15b2d72614587e3c",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch All Articles",
+			"request": {
+				"url": "http://localhost:8080/api/v1/article/all",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Article By Non-Existent Id",
+			"request": {
+				"url": "http://localhost:8080/api/v1/article/xxxshouldnotexistxxx",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Articles By Topics",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/v1/article?topics[]=daily,lifestyle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"article"
+					],
+					"query": [
+						{
+							"key": "topics[]",
+							"value": "daily,lifestyle",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

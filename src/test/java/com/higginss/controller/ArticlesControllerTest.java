@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.web.context.WebApplicationContext;
 
 /**
- * Test for the RESTful MVC layer.
+ * Test for the RESTful MVC layer (mocked web service layer tests).
  *
  * @author higginss
  */
@@ -121,5 +121,5 @@ public class ArticlesControllerTest {
                 .andExpect(status().isNotFound());
     }
     
-    // TODO: add more tests to complete code coverage...adding in extreme/error cases...
+    // TODO: add more tests to complete code coverage...adding in extreme/error cases...add before coding to TDD.
 }
