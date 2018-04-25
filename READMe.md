@@ -18,7 +18,7 @@ And run e.g. >java -jar article-microservice-0.0.1-SNAPSHOT.jar
 
 Test by downloading https://github.com/shigger/article-crud-micro-service/blob/master/src/test/article_tests.postman_collection.json
 
-And import the test scripts/cases into Postman to run and use as a sandbox.
+And import the test scripts/cases into Postman to run and use as a sandbox and/or inspect API doco available on swagger at https://app.swaggerhub.com/apis/shigger/article-micro-services/0.1
 
 Or test by constructing api requests based on the api documentation supplied (TODO) using any appropriate tool.
 
@@ -46,10 +46,10 @@ Tests = Spring Test/Mock + JUnit + Postman (RESTful API)
 
 CI = TravisCI (integrated with GitHub + Postman + JaCoCo)
 
+RESTful API Design = swagger (inspector + hub) + postman
+
 TODO:
 ----
-
-Web Service Doco = RAML
 
 Container = Docker
 
