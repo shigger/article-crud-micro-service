@@ -1,7 +1,7 @@
-/target/classes
-/target/generated*
-/target/maven*
-/target/surefire-reports
-/target/test-classes
-/target/*.original
+/target/classes/
+/target/generated*/
+/target/maven*/
+/target/surefire-reports/
+/target/test-classes/
+/target/*.original/
 /nbproject/

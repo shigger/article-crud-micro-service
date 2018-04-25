@@ -9,18 +9,18 @@ decisions regarding code-coverage, source control, continuous integration etc - 
 Application Architecture:
 ------------------------
 
-Frameworks = Spring Boot
-Database = MongoDB (embedded)
-Build Tool = Maven
-Language = Java (8)
-Source Control = GitHub
-Code-Coverage = JaCoCo + codecov.io
-Tests = Spring Test/Mock + JUnit + Postman (RESTful API) 
-CI = TravisCI (integrated with GitHub + Postman + JaCoCo).
+Frameworks = Spring Boot\n
+Database = MongoDB (embedded)\n
+Build Tool = Maven\n
+Language = Java (8)\n
+Source Control = GitHub\n
+Code-Coverage = JaCoCo + codecov.io\n
+Tests = Spring Test/Mock + JUnit + Postman (RESTful API)\n
+CI = TravisCI (integrated with GitHub + Postman + JaCoCo)\n
 
 TODO:
 ----
 
-Web Service Doco = RAML
+Web Service Doco = RAML\n
 Container = Docker
 
