@@ -5,16 +5,20 @@ jdk: oraclejdk8
 #notifications:
 #    email:
 #        - xxxxxxx@gmail.com
-install:
-  - npm install newman
-
-before_script:
-  - node --version
-  - npm --version
-  - node_modules/.bin/newman --version
-
-script:
-  - node_modules/.bin/newman run src/test/article_api_tests.postman_collection.json
-  
+#
+# Following for postman integration
+#
+#install:
+#  - npm install newman
+#
+#before_script:
+#  - node --version
+#  - npm --version
+#  - node_modules/.bin/newman --version
+#
+#script:
+#  - node_modules/.bin/newman run src/test/article_tests.postman_collection.json
+# End of postman integration
+#
 after_success:
   - bash <(curl -s https://codecov.io/bash)
