@@ -1,0 +1,607 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Portal Refresh",
+		"_postman_id": "d57e9a74-6db3-16b5-f067-745bfaa18283",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Portal Refresh - Get Attachment",
+			"request": {
+				"url": "http://localhost:8080/KcomCustomerPortal-war/services/change-management/changes/CR121300/attachments/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Add Attachment",
+			"request": {
+				"url": "http://localhost:8080/KcomCustomerPortal-war/services/change-management/changes/CR121304/attachments",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"changeAddAttachmentRequest\": {\r\n  \"attachment\":{\r\n  \t\"name\":\"FromREST01.txt\",\r\n    \"data\":  \"dGhpcyBpcyBhbiBhdHRhY2htZW50\"\r\n  }\r\n}\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Create Change",
+			"request": {
+				"url": "http://localhost:8080/KcomCustomerPortal-war/services/change-management/changes/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"changeCreateRequest\": {\r\n  \"sourceReference\":\"steve-test-01\",\r\n  \"customerReference\": \"steve.higgins\",\r\n  \"siteID\":\"HMRC0001\",\r\n  \"reason\":\"RESTful web service test\",\r\n  \"summary\":\"To test service through REST\",\r\n  \"expectedImplementationDate\":\"2018-03-30T19:32:35.123\"\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Add Update",
+			"request": {
+				"url": "http://localhost:8080/KcomCustomerPortal-war/services/change-management/changes/CR121302",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"changeAddUpdateRequest\": {\r\n  \t\"text\":\"This is an update from a RESTful web service\",\r\n  \t\"forename\":\"Stephen\",\r\n    \"surname\":  \"Higgins\"\r\n   }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Create Incident",
+			"request": {
+				"url": "http://localhost:8080/KcomCustomerPortal-war/services/incident-management/incidents/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"incidentCreateRequest\": {\r\n  \"sourceReference\":\"steve-test-01\",\r\n  \"customerReference\": \"steve.higgins\",\r\n  \"siteID\":\"HMRC0001\",\r\n  \"description\":\"To test service through REST\"\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Add Update To Incident",
+			"request": {
+				"url": "http://localhost:8080/KcomCustomerPortal-war/services/incident-management/incidents/I718433",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"incidentAddUpdateRequest\": {\r\n  \t\"detailText\":\"This is an update from a RESTful web service\",\r\n  \t\"forename\":\"Stephen\",\r\n    \"surname\":  \"Higgins\"\r\n   }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Add Attachment To Incident",
+			"request": {
+				"url": "http://localhost:8080/KcomCustomerPortal-war/services/incident-management/incidents/I718436/attachments",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"incidentAddAttachmentRequest\": {\r\n  \"attachment\":{\r\n  \t\"name\":\"FromREST01.txt\",\r\n    \"data\":  \"dGhpcyBpcyBhbiBhdHRhY2htZW50\"\r\n  }\r\n}\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Get Attachment For Incident",
+			"request": {
+				"url": "http://localhost:8080/KcomCustomerPortal-war/services/incident-management/incidents/I718436/attachments/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Get  Subset Of Change By Incident Id",
+			"request": {
+				"url": {
+					"raw": "http://shaggydog/KcomCustomerPortal-war/services/change-management/changes/?filters=id==CR121279&fields=id,modifiedDate,reason,status,summary",
+					"protocol": "http",
+					"host": [
+						"shaggydog"
+					],
+					"path": [
+						"KcomCustomerPortal-war",
+						"services",
+						"change-management",
+						"changes",
+						""
+					],
+					"query": [
+						{
+							"key": "filters",
+							"value": "id==CR121279",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "fields",
+							"value": "id,modifiedDate,reason,status,summary",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Get  Full Change By Change Id",
+			"request": {
+				"url": {
+					"raw": "http://shaggydog/KcomCustomerPortal-war/services/change-management/changes/?filters=id==CR121279",
+					"protocol": "http",
+					"host": [
+						"shaggydog"
+					],
+					"path": [
+						"KcomCustomerPortal-war",
+						"services",
+						"change-management",
+						"changes",
+						""
+					],
+					"query": [
+						{
+							"key": "filters",
+							"value": "id==CR121279",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Get  Changes 2",
+			"request": {
+				"url": {
+					"raw": "http://shaggydog/KcomCustomerPortal-war/services/change-management/changes?filters=status==Completion&limit=2",
+					"protocol": "http",
+					"host": [
+						"shaggydog"
+					],
+					"path": [
+						"KcomCustomerPortal-war",
+						"services",
+						"change-management",
+						"changes"
+					],
+					"query": [
+						{
+							"key": "filters",
+							"value": "status==Completion",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "limit",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Get  Changes By Id After Just Create",
+			"request": {
+				"url": {
+					"raw": "http://shaggydog/KcomCustomerPortal-war/services/change-management/changes?filters=id==CR121309",
+					"protocol": "http",
+					"host": [
+						"shaggydog"
+					],
+					"path": [
+						"KcomCustomerPortal-war",
+						"services",
+						"change-management",
+						"changes"
+					],
+					"query": [
+						{
+							"key": "filters",
+							"value": "id==CR121309",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Get  Incidents",
+			"request": {
+				"url": {
+					"raw": "http://shaggydog/KcomCustomerPortal-war/services/change-management/changes?limit=2&fields=id",
+					"protocol": "http",
+					"host": [
+						"shaggydog"
+					],
+					"path": [
+						"KcomCustomerPortal-war",
+						"services",
+						"change-management",
+						"changes"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "fields",
+							"value": "id",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Get Subset Changes Sorted By Create Date",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/KcomCustomerPortal-war/services/change-management/changes/?limit=10&filters=impact@=1&fields=id,summary,impact,type,createDate&sort=-createDate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"KcomCustomerPortal-war",
+						"services",
+						"change-management",
+						"changes",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "filters",
+							"value": "impact@=1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "fields",
+							"value": "id,summary,impact,type,createDate",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "sort",
+							"value": "-createDate",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Get  Full Lite Change By Incident Id",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/KcomCustomerPortal-war/services/change-management/changes/?filters=id==CR121279",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"KcomCustomerPortal-war",
+						"services",
+						"change-management",
+						"changes",
+						""
+					],
+					"query": [
+						{
+							"key": "filters",
+							"value": "id==CR121279",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Get  Incidents By Description Wildcard",
+			"request": {
+				"url": {
+					"raw": "http://shaggydog/KcomCustomerPortal-war/services/incident-management/incidents?filters=description@=Error-occuring&fields=id,description,createDate",
+					"protocol": "http",
+					"host": [
+						"shaggydog"
+					],
+					"path": [
+						"KcomCustomerPortal-war",
+						"services",
+						"incident-management",
+						"incidents"
+					],
+					"query": [
+						{
+							"key": "filters",
+							"value": "description@=Error-occuring",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "fields",
+							"value": "id,description,createDate",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"AddChangeRecordAttachmentRequest\": {\r\n  \"changeID\":\"CR121300\",\r\n  \"attachment\":{\r\n  \t\"name\":\"ATT01\",\r\n  \t\"slot\":1,\r\n  \t\"data\":[\"dGhpcyBpcyBhbiBhdHRhY2htZW50\"]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Add Attachment For Change",
+			"request": {
+				"url": "http://shaggydog/KcomCustomerPortal-war/services/change-management/changes/CR109191/attachments",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"changeAddAttachmentRequest\": {\r\n  \"attachment\":{\r\n  \t\"name\":\"FromRESTBySteve.txt\",\r\n  \t\"slot\": 2,\r\n    \"data\":  \"dGhpcyBpcyBhbiBhdHRhY2htZW50\"\r\n  }\r\n}\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Create Change With Companies",
+			"request": {
+				"url": "http://localhost:8080/KcomCustomerPortal-war/services/change-management/changes/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"changeCreateRequest\": {\r\n  \"sourceReference\":\"steve-test-01\",\r\n  \"customerReference\": \"steve.higgins\",\r\n  \"siteID\":\"HMRC0001\",\r\n  \"reason\":\"RESTful web service test\",\r\n  \"summary\":\"To test service through REST\",\r\n  \"attachments\": {\r\n\t  \"attachment\": [\r\n\t  \t{\r\n\t  \t\"name\":\"BySteve1.txt\",\r\n\t    \"data\":  \"dGhpcyBpcyBhbiBhdHRhY2htZW50\"\r\n\t  \t},\r\n\t    {\r\n\t  \t\"name\":\"ByHiggins2.txt\",\r\n\t    \"data\":  \"dGhpcyBpcyBhbiBhdHRhY2htZW50\"\r\n\t  \t}\r\n\t  ]\r\n  }\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Portal Refresh - Create Change With Attachments",
+			"request": {
+				"url": "http://shaggydog/KcomCustomerPortal-war/services/change-management/changes/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"changeCreateRequest\": {\r\n  \"sourceReference\":\"steve-test-01\",\r\n  \"customerReference\": \"steve.higgins\",\r\n  \"siteID\":\"HMRC0001\",\r\n  \"reason\":\"RESTful web service test\",\r\n  \"summary\":\"To test service through REST\",\r\n  \"attachments\": [\r\n\t  \"attachment\":{\r\n\t  \t\"name\":\"FromRESTBySteve.txt\",\r\n\t    \"data\":  \"dGhpcyBpcyBhbiBhdHRhY2htZW50\"\r\n\t  }\r\n  ]\r\n}}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

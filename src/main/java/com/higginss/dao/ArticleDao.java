@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
  * <u>Design Notes</u>
  * <p>
  * Extend options = use MongoRepository if pagination and sorting capabilities are required else for basic CRUD use
- * CrudRespostory.
+ * CrudRespostory..
  * 
  * @author higginss
  */
