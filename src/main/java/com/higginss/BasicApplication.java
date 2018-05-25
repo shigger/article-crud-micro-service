@@ -13,7 +13,7 @@ public class BasicApplication {
     }
 
     @PreDestroy
-    public void onDestroy() throws Exception {
+    public void onDestroy() {
         System.out.println("Spring Container is destroyed!");
     }
 }

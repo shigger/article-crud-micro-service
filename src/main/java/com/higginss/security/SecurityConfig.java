@@ -1,6 +1,5 @@
 package com.higginss.security;
 
-import javafx.beans.binding.When;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,9 +12,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.inMemoryAuthentication().passwordEncoder(org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance())
-                .withUser("user1").password("secret1")
-                .roles("USER").and().withUser("admin1").password("secret1")
-                .roles("USER", "ADMIN");
+                .withUser("user1").password("secret1").roles("USER").and()
+                .withUser("admin1").password("secret1").roles("USER", "ADMIN");
     }
 
     // Authorization : Role -> Access
@@ -33,9 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.csrf().disable();
         http.httpBasic().and().authorizeRequests()
-                .antMatchers("/api/v1/article/**").hasRole("USER") // All API calls must be users.
-                .antMatchers("/**").hasRole("ADMIN").and()         // Other resources must be admin.
-                .headers().frameOptions().disable();
+            .antMatchers("/api/v1/article/**").hasAnyRole("USER") // All API calls need user/admin role.
+            .antMatchers("/api/v1/admin/**").hasAnyRole("ADMIN")  // Admin resources need admin role.
+            .anyRequest().permitAll(); // Or other resources are permitted with no authentication.
     }
 
 }

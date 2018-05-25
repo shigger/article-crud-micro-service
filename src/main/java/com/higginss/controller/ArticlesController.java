@@ -84,6 +84,11 @@ public class ArticlesController {
         return article;
     }
 
+    @GetMapping(value = "/admin/{something}")
+    public void doSomeAdminStuff(@PathVariable String something) {
+        System.out.println("Doing admin stuff");
+    }
+
     /**
      * Fetch all articles back (no pagination/sorting implemented): example uri =
      * http://localhost:8080/api/v1/article/all
