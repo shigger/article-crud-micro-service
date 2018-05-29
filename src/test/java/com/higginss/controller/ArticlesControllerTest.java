@@ -2,41 +2,42 @@ package com.higginss.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.higginss.model.Article;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import org.junit.Test;
+import com.higginss.security.SecurityConfig;
+import org.junit.*;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
-import org.mockito.Mockito;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestContext;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import org.springframework.web.context.WebApplicationContext;
 
 /**
- * Test for the RESTful MVC layer (mocked web service layer tests).
+ * Test for the RESTful MVC layer (mocked web service layer tests) testing security, access and interface.
  *
  * @author higginss
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestContext.class, WebApplicationContext.class})
-@WebMvcTest(ArticlesController.class)
+// Following is important: need to add the security config context here or the roles are not used (but defaults).
+// @ContextConfiguration defines class-level metadata that is used to determine how to load and configure an
+// ApplicationContext for integration tests.
+@ContextConfiguration(classes = {SecurityConfig.class, ArticlesController.class})
+// By default, tests annotated with @WebMvcTest will also auto-configure Spring Security and MockMvc. Using this
+// annotation will disable full auto-configuration and instead apply only configuration relevant to MVC tests.
+@WebMvcTest(value = ArticlesController.class)
+// Think you can also use whole context by @SpringBootContext which might simplify above.
+// @RunWith(SpringRunner.class)
+// @SpringBootTest
 public class ArticlesControllerTest {
 
     @Autowired
@@ -65,6 +66,12 @@ public class ArticlesControllerTest {
     }
 
     @Test
+    public void contextLoads() throws Exception {
+        assertThat(articlesController).isNotNull();
+    }
+
+    @Test
+    @WithMockUser(username = "user1", password = "secret1", roles = "USER")
     public void testUploadArticle() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Article article = new Article();
@@ -87,6 +94,7 @@ public class ArticlesControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user1", password = "secret1", roles = "USER")
     public void testFetchArticleExists() throws Exception {
         Article article = new Article();
         article.setId("1");
@@ -106,6 +114,7 @@ public class ArticlesControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user1", password = "secret1", roles = "USER")
     public void testResourceDoesNotExist() throws Exception {
         when(articlesController.fetchArticle("1")).thenReturn(null);
         mockMvc.perform(get("/api/v1/article/{id}/resourcedoesnotexist", "1"))
@@ -115,11 +124,59 @@ public class ArticlesControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user1", password = "secret1", roles = "USER")
     public void testFetchArticleNotFound() throws Exception {
         when(articlesController.fetchArticle("-1")).thenThrow(new ArticleNotFoundException("article not to be found"));
         mockMvc.perform(get("/api/v1/article/{id}", "-1"))
                 .andExpect(status().isNotFound());
     }
-    
+
+    /**
+     * Test security with lack of authentication on user protected URI resources.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testNotAuthorisedAtUserLevel() throws Exception {
+        // No basic auth details passed over so should be unauthorised.
+        this.mockMvc.perform(get("/api/v1/article/12345")).andExpect(status().isUnauthorized());
+    }
+
+    /**
+     * Test security with lack of authentication on user protected URI resources.
+     *
+     * @throws Exception
+     */
+    @Test
+    @WithMockUser(username = "user1", password = "secret1", roles = "USER")
+    public void testAuthorisedAtUserLevel() throws Exception {
+        // No basic auth details passed over so should be unauthorised.
+        this.mockMvc.perform(get("/api/v1/article/12345")).andExpect(status().isOk());
+    }
+
+    /**
+     * Test security with lack of authentication on an admin resource using a user resource role.
+     *
+     * @throws Exception
+     */
+    @Test
+    @WithMockUser(username = "user1", password = "secret1", roles = "USER")
+    public void testForbiddenAtUserLevel() throws Exception {
+        // No basic auth details passed over so should be unauthorised.
+        this.mockMvc.perform(get("/api/v1/admin/12345")).andExpect(status().isForbidden());
+    }
+
+    /**
+     * Test security with lack of authentication on an admin resource using a user resource role.
+     *
+     * @throws Exception
+     */
+    @Test
+    @WithMockUser(username = "user1", password = "secret1", roles = "ADMIN")
+    public void testAuthorisedAtAdminLevel() throws Exception {
+        // No basic auth details passed over so should be unauthorised.
+        this.mockMvc.perform(get("/api/v1/admin/12345")).andExpect(status().isOk());
+    }
+
     // TODO: add more tests to complete code coverage...adding in extreme/error cases...add before coding to TDD.
 }

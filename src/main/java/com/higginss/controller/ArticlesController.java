@@ -2,9 +2,12 @@ package com.higginss.controller;
 
 import com.higginss.dao.ArticleDao;
 import com.higginss.model.Article;
+
 import java.util.Arrays;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +27,14 @@ import org.springframework.web.bind.annotation.RequestParam;
  * For consideration: it might be beneficial to create individual nano-services for each CRUD type operation (but these
  * decisions depend on the use-cases and the minimal viable product suitable for the business use-case etc).
  * <p>
- * If the use-cases were to 'grow' and become more complex recommend introducing some form of delegation/mediator 
+ * If the use-cases were to 'grow' and become more complex recommend introducing some form of delegation/mediator
  * pattern to handle/encapsulate the business logic and handle communications with the DAO (business object).
  *
  * @author higginss
  */
 @RestController
 @RequestMapping("/api/v1")
+//@PreAuthorize("hasAuthority('ROLE_DOMAIN_USER')") // alternative to using a security config bean.
 public class ArticlesController {
 
     @Autowired
@@ -56,10 +60,9 @@ public class ArticlesController {
         if (article.getId() != null && !article.getId().equals("")) {
             // For updating an article ensure it already has been persisted and update/replace all fields.
             articleDao.save(article);
-        }
-        else {
+        } else {
             // Is this an invalid invocation as we expect to update the article not create a new one !
-             throw new ArticleNotFoundException("id-" + "");
+            throw new ArticleNotFoundException("id-" + "");
         }
         return article;
     }
@@ -81,6 +84,11 @@ public class ArticlesController {
         return article;
     }
 
+    @GetMapping(value = "/admin/{something}")
+    public void doSomeAdminStuff(@PathVariable String something) {
+        System.out.println("Doing admin stuff");
+    }
+
     /**
      * Fetch all articles back (no pagination/sorting implemented): example uri =
      * http://localhost:8080/api/v1/article/all
@@ -94,6 +102,18 @@ public class ArticlesController {
         return (List<Article>) articleDao.findAll();
     }
 
+    @GetMapping(value = "/article/export")
+    public List<Article> exportArticles() {
+        List<Article> articles = (List<Article>) articleDao.findAll();
+        // Now we have all the article we can write it to a persistent file store for safe-keeping.
+        // Then on startup we could load this file into the database by calling the post for every
+        // article (bulk load). There are export/import mongodb command line options that could be
+        // called perhaps as an alternative solution.
+        // Actually this should not be an api as not user facing operation but should be invoked
+        // automatically on spring boot startup and termination to import and export.
+        return articles;
+    }
+
     /**
      * Fetch all articles across the topics supplied. Example URI:
      * http://localhost:8080/api/v1/article?topics[]=sport,technology - bring back all sport and technology articles.
@@ -104,6 +124,7 @@ public class ArticlesController {
      * <p>
      * URI design option is category=1&category=2 etc or construct a generic model for 'full' query handling.
      * <p>
+     *
      * @param topics array of topics to return articles against.
      * @return list of articles across the topics supplied.
      */
