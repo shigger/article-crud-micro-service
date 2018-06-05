@@ -1,16 +1,20 @@
 package com.higginss.security;
 
+/**
+ * Simple Security with Spring Boot
+ */
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-@Configuration
+@Configuration // Marker to configure existing bean before the application starts.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // Authentication : User --> Roles
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
+        // In latest security pom nooppasswordencoder deprecated.
         auth.inMemoryAuthentication().passwordEncoder(org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance())
                 .withUser("user1").password("secret1").roles("USER").and()
                 .withUser("admin1").password("secret1").roles("USER", "ADMIN");
@@ -32,8 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.httpBasic().and().authorizeRequests()
             .antMatchers("/api/v1/article/**").hasAnyRole("USER") // All API calls need user/admin role.
+            //.antMatchers("/api/v1/article/image/**").hasAnyRole("USER") // All API calls need user/admin role.
             .antMatchers("/api/v1/admin/**").hasAnyRole("ADMIN")  // Admin resources need admin role.
             .anyRequest().permitAll(); // Or other resources are permitted with no authentication.
     }
-
 }
