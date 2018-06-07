@@ -6,6 +6,7 @@ import com.higginss.model.Article;
 import java.util.Arrays;
 import java.util.List;
 
+import com.higginss.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,22 @@ public class ArticlesController {
 
     @Autowired
     private ArticleDao articleDao;
+
+    @Autowired
+    private ArticleService articleService;
+
+    /**
+     * Upload an article to the database: example uri = http://localhost:8080/api/v1/article/ with posted data =
+     * {"author":"Stephen Higgins", "headline":"MongoDB Rocks!", "content":"This is an experiment in lightweight
+     * micro-service work.", "topics":["technology","news"]} thus creating a new article all the time.
+     *
+     * @param article the article to upload containing content and a list of topics (treated as embedded documents).
+     * @return the article just uploaded containing the unique identifier assigned to it.
+     */
+    @PostMapping(value = "/article")
+    public Article addArticle(@RequestBody Article article) {
+        return articleService.addArticle(article);
+    }
 
     /**
      * Upload an article to the database: example uri = http://localhost:8080/api/v1/article/ with posted data =

@@ -1,6 +1,7 @@
 package com.higginss.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.higginss.dao.ArticleDao;
 import com.higginss.model.Article;
 import com.higginss.security.SecurityConfig;
 import org.junit.*;
@@ -43,8 +44,8 @@ public class ArticlesControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private ArticlesController articlesController;
+//    @MockBean
+//    private ArticlesController articlesController;
 
     public ArticlesControllerTest() {
     }
@@ -67,7 +68,7 @@ public class ArticlesControllerTest {
 
     @Test
     public void contextLoads() throws Exception {
-        assertThat(articlesController).isNotNull();
+        //assertThat(articlesController).isNotNull();
     }
 
     @Test
@@ -80,7 +81,7 @@ public class ArticlesControllerTest {
         article.setAuthor("Article Author");
         article.setContent("Article Content");
         String jsonArticle = objectMapper.writeValueAsString(article);
-        when(articlesController.uploadArticle(Mockito.any(Article.class))).thenReturn(article);
+        //when(articlesController.uploadArticle(Mockito.any(Article.class))).thenReturn(article);
         mockMvc.perform(post("/api/v1/article/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonArticle))
@@ -101,7 +102,7 @@ public class ArticlesControllerTest {
         article.setHeadline("Article Headline");
         article.setAuthor("Article Author");
         article.setContent("Article Content");
-        when(articlesController.fetchArticle("1")).thenReturn(article);
+        //when(articlesController.fetchArticle("1")).thenReturn(article);
         mockMvc.perform(get("/api/v1/article/{id}", article.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -109,24 +110,24 @@ public class ArticlesControllerTest {
                 .andExpect(jsonPath("$.author", is(article.getAuthor())))
                 .andExpect(jsonPath("$.headline", is(article.getHeadline())));
 
-        verify(articlesController, times(1)).fetchArticle("1");
-        verifyNoMoreInteractions(articlesController);
+        //verify(articlesController, times(1)).fetchArticle("1");
+        //verifyNoMoreInteractions(articlesController);
     }
 
     @Test
     @WithMockUser(username = "user1", password = "secret1", roles = "USER")
     public void testResourceDoesNotExist() throws Exception {
-        when(articlesController.fetchArticle("1")).thenReturn(null);
+        //when(articlesController.fetchArticle("1")).thenReturn(null);
         mockMvc.perform(get("/api/v1/article/{id}/resourcedoesnotexist", "1"))
                 .andExpect(status().isNotFound());
-        verify(articlesController, times(0)).fetchArticle("1");
-        verifyNoMoreInteractions(articlesController);
+        //verify(articlesController, times(0)).fetchArticle("1");
+        //verifyNoMoreInteractions(articlesController);
     }
 
     @Test
     @WithMockUser(username = "user1", password = "secret1", roles = "USER")
     public void testFetchArticleNotFound() throws Exception {
-        when(articlesController.fetchArticle("-1")).thenThrow(new ArticleNotFoundException("article not to be found"));
+        //when(articlesController.fetchArticle("-1")).thenThrow(new ArticleNotFoundException("article not to be found"));
         mockMvc.perform(get("/api/v1/article/{id}", "-1"))
                 .andExpect(status().isNotFound());
     }
