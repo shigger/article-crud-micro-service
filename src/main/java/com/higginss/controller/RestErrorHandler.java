@@ -20,7 +20,7 @@ public class RestErrorHandler {
     @ExceptionHandler(ArticleNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handleArticleNotFoundExceptions() {
-        System.out.println("----------Caught Article Not Found Exception-----------");
+        System.out.println("------------ Caught Article Not Found Exception-------------");
         //TODO - add in more details and handling here...
     }
 

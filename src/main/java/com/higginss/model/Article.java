@@ -1,16 +1,19 @@
 package com.higginss.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.mongodb.gridfs.GridFS;
+import org.bson.BSON;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <u>Design Notes</u>
  * <p>
- The topics are self-contained within each article document but perhaps could be stored/aggregated externally if
- deemed beneficial and if possible in MongoDB (similar to a 'join' in SQL).
- * 
+ * The topics are self-contained within each article document but perhaps could be stored/aggregated externally if
+ * deemed beneficial and if possible in MongoDB (similar to a 'join' in SQL).
+ *
  * @author higginss
  */
 @Document(collection = "articles")
@@ -22,11 +25,12 @@ public class Article {
     private String headline;
     private String content;
     private List<String> topics = new ArrayList<>();
+    private GridFS image; //GridFS storage spec is mainly used for working with files that exceed the BSON-document size limit of 16MB.
 
     public Article() {
     }
 
-    public Article(String author, String headline, String content, List<String>topics) {
+    public Article(String author, String headline, String content, List<String> topics) {
         this.author = author;
         this.headline = headline;
         this.content = content;
@@ -73,9 +77,18 @@ public class Article {
         this.topics = topics;
     }
 
+    public GridFS getImage() {
+        return image;
+    }
+
+    public void setImage(GridFS image) {
+        this.image = image;
+    }
+
     @Override
+
     public String toString() {
         return "Article{" + "id=" + id + ", author=" + author + ", headline=" + headline + ", content=" + content +
                 ", topics=" + topics + '}';
-    }   
+    }
 }
