@@ -2,6 +2,7 @@ package com.higginss.controller;
 
 import com.higginss.model.Article;
 import com.higginss.service.ArticleService;
+import com.higginss.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,10 +40,12 @@ import java.util.List;
 //@PreAuthorize("hasAuthority('ROLE_DOMAIN_USER')") // alternative to using a security config bean.
 public class ArticlesController {
 
+    private final ArticleService articleService;
+
     @Autowired
-    private ArticleService articleService;
-//    @Autowired
-//    private ImageService imageService;
+    public ArticlesController(ArticleService articleService) {
+        this.articleService = articleService;
+    }
 
     /**
      * Upload an article to the database: example uri = http://localhost:8080/api/v1/article/ with posted data =

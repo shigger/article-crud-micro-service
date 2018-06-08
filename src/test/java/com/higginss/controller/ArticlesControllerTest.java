@@ -8,7 +8,9 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -40,13 +42,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // Following is important: need to add the security config context here or the roles are not used (but defaults).
 // @ContextConfiguration defines class-level metadata that is used to determine how to load and configure an
 // ApplicationContext for integration tests.
-@ContextConfiguration(classes = {SecurityConfig.class,ArticlesController.class})
+@ContextConfiguration(classes = {SecurityConfig.class, ArticlesController.class})
 // By default, tests annotated with @WebMvcTest will also auto-configure Spring Security and MockMvc. Using this
 // annotation will disable full auto-configuration and instead apply only configuration relevant to MVC tests.
-@WebMvcTest(value=ArticlesController.class,secure = true)
+@WebMvcTest(value = ArticlesController.class, secure = true)
 // Think you can also use whole context by @SpringBootContext which might simplify above.
 // @RunWith(SpringRunner.class)
-// @SpringBootTest
+ //@SpringBootTest
 public class ArticlesControllerTest {
 
     @Autowired
